@@ -1,0 +1,497 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #0f0f0f;
+    color: #fff;
+    min-height: 100vh;
+    padding: 10px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    color: #ff0000;
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.url-input {
+    background: #272727;
+    border: 2px solid #404040;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.url-input input {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    outline: none;
+    padding: 10px;
+    border-radius: 6px;
+    background: #1a1a1a;
+}
+
+.url-input input::placeholder {
+    color: #aaa;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.paste-load-btn, .load-btn {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    flex: 1;
+    justify-content: center;
+    min-height: 44px;
+}
+
+.load-btn {
+    background: #ff0000;
+}
+
+.paste-load-btn:hover {
+    background: #45a049;
+}
+
+.load-btn:hover {
+    background: #cc0000;
+}
+
+.paste-load-btn:disabled, .load-btn:disabled {
+    background: #666;
+    cursor: not-allowed;
+}
+
+.video-container {
+    position: relative;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    scroll-margin-top: 20px;
+}
+
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.controls {
+    background: #1a1a1a;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    border-top: 1px solid #404040;
+    flex-wrap: wrap;
+}
+
+.nav-btn {
+    background: #404040;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    flex: 1;
+    justify-content: center;
+    max-width: 200px;
+}
+
+.nav-btn:hover:not(:disabled) {
+    background: #505050;
+}
+
+.nav-btn:disabled {
+    background: #2a2a2a;
+    color: #666;
+    cursor: not-allowed;
+}
+
+.timestamp-section {
+    background: #1a1a1a;
+    border-radius: 12px;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+.timestamp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.timestamp-header h3 {
+    color: #fff;
+    font-size: 1.2em;
+}
+
+.loading {
+    display: none;
+    color: #ff0000;
+    font-size: 14px;
+    align-items: center;
+    gap: 8px;
+}
+
+.loading.show {
+    display: flex;
+}
+
+.spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #666;
+    border-top: 2px solid #ff0000;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.manual-input {
+    margin-bottom: 15px;
+}
+
+.manual-input textarea {
+    width: 100%;
+    background: #272727;
+    border: 2px solid #404040;
+    border-radius: 6px;
+    padding: 12px;
+    color: #fff;
+    font-size: 14px;
+    font-family: 'Courier New', monospace;
+    resize: vertical;
+    margin-bottom: 10px;
+    min-height: 120px;
+}
+
+.manual-input textarea::placeholder {
+    color: #666;
+}
+
+/* Nouvelle configuration pour le conteneur de liste des timestamps */
+.timestamp-list-container {
+    background: #272727;
+    border: 2px solid #404040;
+    border-radius: 8px;
+    max-height: 320px; /* 4 lignes * 80px par ligne = 320px sur mobile */
+    overflow-y: auto;
+}
+
+.timestamp-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.timestamp-item {
+    background: #404040;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    min-height: 80px;
+    width: 100%;
+    border-bottom: 1px solid #333;
+}
+
+.timestamp-item:last-child {
+    border-bottom: none;
+}
+
+.timestamp-item:hover {
+    background: #ff0000;
+    transform: none;
+    box-shadow: inset 0 0 10px rgba(255, 0, 0, 0.3);
+}
+
+.timestamp-item:active {
+    transform: scale(0.98);
+}
+
+.timestamp-item.active {
+    background: #ff0000;
+    box-shadow: inset 0 0 15px rgba(255, 0, 0, 0.5);
+    border-left: 4px solid #fff;
+}
+
+.timestamp-thumbnail {
+    width: 80px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 6px;
+    background: #2a2a2a;
+    flex-shrink: 0;
+    margin-right: 12px;
+}
+
+.timestamp-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+    text-align: left;
+}
+
+.timestamp-time {
+    font-weight: bold;
+    font-size: 16px;
+    font-family: 'Courier New', monospace;
+    color: #fff;
+    text-align: left;
+}
+
+.timestamp-comment {
+    font-size: 13px;
+    color: #ccc;
+    line-height: 1.3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    white-space: pre-wrap;
+    text-align: left;
+}
+
+.no-timestamps {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    padding: 40px 20px;
+}
+
+.info-box {
+    background: #272727;
+    border-left: 4px solid #ff0000;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 0 6px 6px 0;
+}
+
+.info-box p {
+    margin: 5px 0;
+    color: #ccc;
+    font-size: 14px;
+}
+
+.status-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    left: 20px;
+    padding: 12px 15px;
+    border-radius: 6px;
+    z-index: 1000;
+    font-size: 14px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    color: white;
+    text-align: center;
+}
+
+.status-message.success {
+    background: #4CAF50;
+}
+
+.status-message.error {
+    background: #f44336;
+}
+
+.status-message.warning {
+    background: #ff9800;
+}
+
+.status-message.info {
+    background: #2196F3;
+}
+
+.status-message a {
+    color: #fff !important;
+    text-decoration: underline;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.status-message a:hover {
+    color: #ffff00 !important;
+}
+
+/* Style de la scrollbar pour webkit browsers */
+.timestamp-list-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.timestamp-list-container::-webkit-scrollbar-track {
+    background: #1a1a1a;
+    border-radius: 4px;
+}
+
+.timestamp-list-container::-webkit-scrollbar-thumb {
+    background: #666;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+.timestamp-list-container::-webkit-scrollbar-thumb:hover {
+    background: #888;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+    body {
+        padding: 20px;
+    }
+
+    .header h1 {
+        font-size: 2.5em;
+    }
+
+    .url-input {
+        flex-direction: row;
+        align-items: center;
+        padding: 15px;
+    }
+
+    .url-input input {
+        flex: 1;
+        background: transparent;
+        padding: 0;
+    }
+
+    .button-group {
+        flex-wrap: nowrap;
+    }
+
+    .paste-load-btn, .load-btn {
+        flex: none;
+    }
+
+    .controls {
+        flex-wrap: nowrap;
+    }
+
+    .nav-btn {
+        flex: none;
+    }
+
+    .status-message {
+        left: auto;
+        max-width: 400px;
+    }
+
+    .timestamp-item {
+        min-height: 90px;
+        padding: 15px;
+    }
+
+    .timestamp-thumbnail {
+        width: 100px;
+        height: 56px;
+        margin-right: 15px;
+    }
+
+    .timestamp-time {
+        font-size: 18px;
+    }
+
+    .timestamp-comment {
+        font-size: 14px;
+    }
+
+    /* Desktop: Plus de timestamps visibles */
+    .timestamp-list-container {
+        max-height: 600px; /* Plus d'espace sur desktop */
+    }
+}
+
+/* Mobile spécifique: Exactement 4 lignes visibles */
+@media (max-width: 767px) {
+    .timestamp-list-container {
+        max-height: 320px; /* 4 × 80px = 320px */
+    }
+    
+    .timestamp-item {
+        min-height: 80px; /* Hauteur fixe pour calcul précis */
+    }
+}
+
+/* Touch accessibility improvement */
+@media (hover: none) and (pointer: coarse) {
+    .timestamp-item:hover {
+        background: #404040;
+        transform: none;
+        box-shadow: none;
+    }
+
+    .timestamp-item:active {
+        background: #ff0000;
+        transform: scale(0.98);
+    }
+}

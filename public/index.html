@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Timestamp Navigator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎬 YouTube Timestamp Navigator</h1>
+            <div class="info-box">
+                <p><strong>How to use:</strong></p>
+                <p>1. Paste a YouTube video URL</p>
+                <p>2. Click "Load Video"</p>
+                <p>3. Timestamps from comments will appear automatically</p>
+                <p>4. Click any timestamp to navigate (works in embedded player or opens YouTube automatically)</p>
+                <p>5. Use Ctrl+Click (desktop) or right-click to force open in YouTube</p>
+            </div>
+        </div>
+
+        <div class="url-input">
+            <input type="text" id="urlInput" placeholder="Paste YouTube URL here (ex: https://www.youtube.com/watch?v=dQw4w9WgXcQ)" />
+            <div class="button-group">
+                <button class="paste-load-btn" id="pasteLoadBtn" title="Paste from clipboard and load">
+                    📋 Paste & Load
+                </button>
+                <button class="load-btn" id="loadBtn">Load</button>
+            </div>
+        </div>
+
+        <div class="video-container" id="videoContainer" style="display: none;">
+            <div class="video-wrapper">
+                <iframe id="videoPlayer" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="controls">
+                <button class="nav-btn" id="prevBtn" disabled>
+                    <span>⬅️</span> Previous
+                </button>
+                <button class="nav-btn" id="nextBtn" disabled>
+                    <span>➡️</span> Next
+                </button>
+            </div>
+        </div>
+
+        <div class="timestamp-section">
+            <div class="timestamp-header">
+                <h3>⏰ Timestamps</h3>
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <span>Extracting timestamps...</span>
+                </div>
+            </div>
+            <div class="manual-input" id="manualInput" style="display: none;">
+                <textarea id="timestampTextarea" placeholder="Paste your timestamps here, one per line:&#10;1:23 Intro&#10;5:45 Demo&#10;12:30 Conclusion" rows="4"></textarea>
+                <button class="load-btn" id="parseBtn">Parse Timestamps</button>
+            </div>
+            <div class="timestamp-list-container" id="timestampListContainer">
+                <div class="timestamp-list" id="timestampList">
+                    <div class="no-timestamps">Load a video to see timestamps</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load modules in order -->
+    <script src="timestamp-extractor.js"></script>
+    <script src="video-manager.js"></script>
+    <script src="ui-manager.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
